@@ -14,9 +14,9 @@ public class BlockFile<K extends Comparable<K>, T extends Serializable & Keyable
     private RandomAccessFile     randomAccessFile;
     private SerializationService serializationService;
 
-    public BlockFile(String filename, int blocksCount, int dataBlockMaxSize) throws IOException {
+    public BlockFile(String filename, int blocksCount, int dataBlockMaxSize, int dataPerDataBlock) throws IOException {
         this.randomAccessFile = new RandomAccessFile(filename, "rw");
-        this.controlBlock = new ControlBlock(blocksCount, dataBlockMaxSize);
+        this.controlBlock = new ControlBlock(blocksCount, dataBlockMaxSize, dataPerDataBlock);
         this.serializationService = new SerializationService();
         saveControlBlock(this.controlBlock);
     }
@@ -76,7 +76,7 @@ public class BlockFile<K extends Comparable<K>, T extends Serializable & Keyable
     }
 
     public Integer getActualBlocksCount() {
-        return controlBlock.getActualDataBlock() + 1;
+        return controlBlock.getActualDataBlock();
     }
 
 }

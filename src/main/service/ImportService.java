@@ -20,18 +20,15 @@ public class ImportService {
         return words;
     }
 
-    public static void loadDictionary(BlockFile blockFile, int dataBlockSize) {
+    public static void loadDictionary(BlockFile blockFile) {
         DataBlock<String, Word> dataBlock = null;
         List<Word> words = getWords();
         for (int i = 0; i < words.size(); i++) {
-            if(i==259){
-                System.out.println("dsa");
-            }
-            if (i % dataBlockSize == 0) {
+            if (i % blockFile.getControlBlock().getDataPerDataBlock() == 0) {
                 if (dataBlock != null && dataBlock.getDataList().size() > 0) {
                     blockFile.saveDataBlock(dataBlock);
                 }
-                dataBlock = new DataBlock<>(dataBlockSize);
+                dataBlock = new DataBlock<>();
             }
 
             dataBlock.addData(words.get(i));
@@ -50,9 +47,9 @@ public class ImportService {
         sc.nextLine();
         while (sc.hasNext()) {
             String[] tmp = sc.nextLine().split(",");
-            String cz = tmp[0];
-            String en = tmp[1];
-            String de = tmp[2];
+            String cz = tmp[0].toLowerCase();
+            String en = tmp[1].toLowerCase();
+            String de = tmp[2].toLowerCase();
             words.add(new Word(cz, en, de));
         }
         sc.close();

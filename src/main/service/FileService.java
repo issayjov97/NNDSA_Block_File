@@ -12,8 +12,8 @@ public class FileService<K extends Comparable<K>, T extends Serializable & Keyab
     private final BlockFile<K, T> blockFile;
     private       int             blockTransferCount = 0;
 
-    public FileService(String filename, int blocksCount, int dataBlockMaxSize) throws IOException {
-        this.blockFile = new BlockFile<>(filename, blocksCount, dataBlockMaxSize);
+    public FileService(String filename, int blocksCount, int dataBlockMaxSize, int dataPerDataBlock) throws IOException {
+        this.blockFile = new BlockFile<>(filename, blocksCount, dataBlockMaxSize, dataPerDataBlock);
     }
 
     public IBlock loadDataBlock(Integer index) {
@@ -57,7 +57,6 @@ public class FileService<K extends Comparable<K>, T extends Serializable & Keyab
         DataBlock<K, T> probeDataBlock;
         while (key.compareTo(leftKey) >= 0 && key.compareTo(rightKey) <= 0) {
             int probe = lowEnd + InterpolationSearch.interpolate((String) leftKey, (String) rightKey, (String) key, highEnd - lowEnd);
-            System.out.println("Probe: " + probe);
             probeDataBlock = (DataBlock<K, T>) blockFile.loadDataBlock(probe);
             blockTransferCount += 1;
             int result = InterpolationSearch.interpolationSearch(key, probeDataBlock.getDataList());

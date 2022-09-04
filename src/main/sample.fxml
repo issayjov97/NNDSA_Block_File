@@ -2,7 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
@@ -14,6 +16,10 @@
             <Button mnemonicParsing="false" onAction="#onInterpolationSearchButtonClicked" prefHeight="25.0" prefWidth="309.0" text="Interpolation search" />
             <Button mnemonicParsing="false" onAction="#onCompareButtonClicked" prefHeight="25.0" prefWidth="309.0" text="Compare search algorithms" />
             <Button mnemonicParsing="false" onAction="#onImportButtonClicked" prefHeight="25.0" prefWidth="309.0" text="Import" />
+            <Label prefHeight="17.0" prefWidth="435.0" text="Records count:" />
+            <TextField fx:id="recordsCountTextField" />
+            <Label prefHeight="17.0" prefWidth="435.0" text="Blocks count:" />
+            <TextField fx:id="blocksCountTextField" />
          </children>
          <BorderPane.margin>
             <Insets />

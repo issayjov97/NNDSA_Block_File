@@ -4,13 +4,18 @@ public class ControlBlock implements IBlock {
 
     private final Integer dataBlocksCount;
     private final Integer dataBlockSize;
-    private final Integer controlBlockSize = 400;
+    private final Integer dataPerDataBlock;
+    private final Integer controlBlockSize = 300;
     private  Integer actualDataBlock  = 0;
 
+    public Integer getDataPerDataBlock() {
+        return dataPerDataBlock;
+    }
 
-    public ControlBlock(Integer blocksCount, Integer dataBlockMaxSize) {
+    public ControlBlock(Integer blocksCount, Integer dataBlockMaxSize, Integer dataPerDataBlock) {
         this.dataBlocksCount = blocksCount;
         this.dataBlockSize = dataBlockMaxSize;
+        this.dataPerDataBlock = dataPerDataBlock;
     }
 
     public Integer getDataBlocksCount() {

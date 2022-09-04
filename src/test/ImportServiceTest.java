@@ -22,8 +22,8 @@ class ImportServiceTest {
 
     @Test
     void shouldLoadWordFromFile() throws IOException {
-        BlockFile<String, Word> blockFile = new BlockFile<>("test.txt", 100, 800);
-        ImportService.loadDictionary(blockFile, 7);
+        BlockFile<String, Word> blockFile = new BlockFile<>("test.txt", 100, 800,7);
+        ImportService.loadDictionary(blockFile);
         Assertions.assertNotEquals(0, blockFile.getControlBlock().getActualDataBlock());
     }
 }

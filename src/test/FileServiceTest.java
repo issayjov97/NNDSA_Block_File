@@ -20,7 +20,7 @@ class FileServiceTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        this.fileService = new FileService<>("test.txt", 100, 800);
+        this.fileService = new FileService<>("test.txt", 100, 800,7);
     }
 
     @AfterEach
@@ -30,7 +30,7 @@ class FileServiceTest {
     @Test
     void shouldFindRecordUsingBinarySearch() throws IOException {
         String key = "Turecko";
-        ImportService.loadDictionary(fileService.getBlockFile(), 7);
+        ImportService.loadDictionary(fileService.getBlockFile());
         int index = fileService.blockBinarySearch(key);
         System.out.println(((DataBlock)fileService.loadDataBlock(index)).getDataList());
         Assertions.assertTrue(index >= 0);
@@ -40,7 +40,7 @@ class FileServiceTest {
     void interpolationSearch() throws IOException {
         String key = "Zuzana";
         System.out.println(dist("Anna", "Pavel"));
-        ImportService.loadDictionary(fileService.getBlockFile(), 7);
+        ImportService.loadDictionary(fileService.getBlockFile());
         int index = fileService.blockInterpolationSearch(key);
         System.out.println(index);
         System.out.println(((DataBlock)fileService.loadDataBlock(index)).getDataList());

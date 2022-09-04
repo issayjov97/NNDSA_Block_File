@@ -20,7 +20,7 @@ class DataBlockTest {
 
     @Test
     void shouldAddDataInSortedOrder() {
-        DataBlock<String, Word> dataBlock = new DataBlock<>(7);
+        DataBlock<String, Word> dataBlock = new DataBlock<>();
         dataBlock.addData(new Word("cau", "cau", "cau"));
         dataBlock.addData(new Word("bye", "bye", "bye"));
         dataBlock.addData(new Word("ahoj", "hello", "cus"));
@@ -31,7 +31,7 @@ class DataBlockTest {
 
     @Test
     void shouldRemoveData() {
-        DataBlock<String, Word> dataBlock = new DataBlock<>(7);
+        DataBlock<String, Word> dataBlock = new DataBlock<>();
         dataBlock.addData(new Word("cau", "cau", "cau"));
         dataBlock.addData(new Word("bye", "bye", "bye"));
         dataBlock.addData(new Word("ahoj", "hello", "cus"));

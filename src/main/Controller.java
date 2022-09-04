@@ -20,18 +20,27 @@ import main.service.ImportService;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Controller {
     @FXML
     private ListView<Word> listView;
 
+    @FXML
+    private TextField recordsCountTextField;
+
+    @FXML
+    private TextField blocksCountTextField;
+
     private FileService<String, Word> fileService;
 
     @FXML
     void initialize() {
         try {
-            fileService = new FileService<>("src/test.txt", 100, 900);
+            fileService = new FileService<>("src/test.txt", 1000, 5000, 100);
+            recordsCountTextField.setText("0");
+            blocksCountTextField.setText(fileService.getActualBlocksCount().toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,8 +95,10 @@ public class Controller {
 
     @FXML
     void onImportButtonClicked(ActionEvent event) {
-        ImportService.loadDictionary(fileService.getBlockFile(), 7);
+        ImportService.loadDictionary(fileService.getBlockFile());
         listView.getItems().addAll(ImportService.getWords());
+        recordsCountTextField.setText(String.valueOf(ImportService.getWords().size()));
+        blocksCountTextField.setText(fileService.getActualBlocksCount().toString());
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("Import was successfully completed!!!");
         alert.showAndWait();
@@ -112,7 +123,7 @@ public class Controller {
         Report interpolationSearchReport = new Report();
 
         List<Word> words = ImportService.getWords();
-        List<String> keys = words.stream().map(Word::getKey).collect(Collectors.toList());
+        Set<String> keys = words.stream().map(Word::getKey).limit(1200).collect(Collectors.toSet());
         keys.forEach(it -> {
             keysTextArea.appendText(it + "\n");
             try {

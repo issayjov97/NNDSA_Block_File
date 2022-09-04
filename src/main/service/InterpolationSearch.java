@@ -17,7 +17,7 @@ public class InterpolationSearch {
         int highEnd = array.size() - 1;
         K leftKey = array.get(lowEnd).getKey();
         K rightKey = array.get(highEnd).getKey();
-        int result = 0;
+        int result = key.compareTo(rightKey) + key.compareTo(leftKey);;
         while (key.compareTo(leftKey) >= 0 && key.compareTo(rightKey) <= 0) {
             int probe = lowEnd + interpolate((String) leftKey, (String) rightKey, (String) key, highEnd - lowEnd);
              result = key.compareTo(array.get(probe).getKey());
@@ -33,7 +33,7 @@ public class InterpolationSearch {
         return result;
     }
 
-
+    // Source: https://stackoverflow.com/questions/47034813/how-to-do-interpolation-search-from-strings
     public static int interpolate(String ys, String xs, String iOfTs, int id) {
         int maxLen = max(max(xs.length(), ys.length()), iOfTs.length());
         BigInteger x = new BigInteger(1, copyOf(xs.getBytes(US_ASCII), maxLen));
@@ -43,5 +43,4 @@ public class InterpolationSearch {
         BigInteger den = x.subtract(y);
         return ZERO.equals(den) ? 0 : (int) d.multiply(iOfT.subtract(y)).divide(den).longValue();
     }
-
 }
